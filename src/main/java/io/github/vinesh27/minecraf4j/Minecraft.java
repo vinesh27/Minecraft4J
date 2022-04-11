@@ -19,7 +19,6 @@ public class Minecraft {
             .version(HttpClient.Version.HTTP_2)
             .build();
     }
-    
     public Minecraft(HttpClient client) { this.client = client; }
     
     public HttpClient getClient() { return client; }
@@ -91,6 +90,4 @@ public class Minecraft {
         }
         return null;
     }
-    
-    
 }

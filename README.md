@@ -1,7 +1,7 @@
 
 # Minecraft4j
 
-[Minecraft4J](https://github.com/vinesh27/Minecraft4J) is an API Wrapper for the Mojang API coded in Java which allows you to access stuff like UUID, Username, Skins and Cape with an ease. It requires negligible stuff to get started. All you need to do is install the library and use the `Minecraft` class.
+[Minecraft4J](https://github.com/vinesh27/Minecraft4J) is an API Wrapper for the [Minecraft API](minecraft-api.com/) coded in Java which allows you to access stuff like UUID, Username, Skins and Cape with an ease. It requires negligible stuff to get started. All you need to do is install the library and use the `Minecraft` class.
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 [![Discord Server](https://img.shields.io/discord/955769173412315136)](https://discord.gg/FmrEZSwXE4)

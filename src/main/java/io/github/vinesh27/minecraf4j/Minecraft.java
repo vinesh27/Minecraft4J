@@ -53,4 +53,44 @@ public class Minecraft {
         return "ERROR";
     }
     
+    //https://wiki.vg/Mojang_API#UUID_to_Name_History
+    /**
+     * Gets the name history of a player
+     * @param uuid - The UUID of the player
+     * @return ArrayList<String> - of names. First element is the current name. Other elements have a | in between.
+     */
+    public ArrayList<String> getNameHistory(String uuid) {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.mojang.com/user/profiles/" + uuid + "/names"))
+            .GET()
+            .build();
+        HttpResponse<String> response;
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 204) return null;
+            if (response.statusCode() == 200) {
+                try {
+                    ArrayList<String> names = new ArrayList<>();
+                    JSONObject root = (JSONObject) new JSONParser().parse(response.body());
+                    for (int i = 0; i < root.size(); i++) {
+                        JSONObject entry = (JSONObject) root.get(i);
+                        if (entry.containsKey("changedToAt"))
+                            names.add(entry.get("name").toString() + "|" + entry.get("changedToAt").toString());
+                        else
+                            names.add(entry.get("name").toString());
+                    }
+                    return names;
+                } catch (ParseException e) {
+                    ArrayList<String> error = new ArrayList<>();
+                    error.add("Parse ERROR [" + response.statusCode() + "]: " + response.body().replace("\n", ""));
+                    return error;
+                }
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
 }

@@ -1,5 +1,5 @@
 
-# Minecraft4j
+# Minecraft4J
 
 [Minecraft4J](https://github.com/vinesh27/Minecraft4J) is an API Wrapper for the [Minecraft API](minecraft-api.com/) coded in Java which allows you to access stuff like UUID, Username, Skins and Cape with an ease. It requires negligible stuff to get started. All you need to do is install the library and use the `Minecraft` class.
 

@@ -30,24 +30,16 @@ public class Minecraft {
      * @param name - The name of the player
      * @return String - The UUID of the player
      */
-    public String getUUID(String name)  {
+    public String getUUID(String name) throws IOException, InterruptedException, ParseException {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.mojang.com/users/profiles/minecraft/" + name))
             .GET()
             .build();
         HttpResponse<String> response;
-        try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 204) return null;
-            if (response.statusCode() == 200) {
-                try {
-                    return ((JSONObject) new JSONParser().parse(response.body())).get("id").toString();
-                } catch (ParseException e) {
-                    return "Parse ERROR [" + response.statusCode() + "]: " + response.body();
-                }
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 204) return null;
+        if (response.statusCode() == 200) {
+            return ((JSONObject) new JSONParser().parse(response.body())).get("id").toString();
         }
         return "ERROR";
     }
@@ -88,6 +80,10 @@ public class Minecraft {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+    
+    public ArrayList<String> getUUIDs(String... names) {
         return null;
     }
 }
